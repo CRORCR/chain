@@ -1,4 +1,4 @@
-package common
+package main
 
 import (
 	"bytes"
@@ -51,7 +51,7 @@ func (block *Block) setHash() {
 		utils_chain.IntToByte(block.TimeStamp),
 		utils_chain.IntToByte(block.Version),
 	}
-	//二维byte,转为一维byte
+	//区块的各个字段 二维byte,转为一维byte,使用join
 	date := bytes.Join(tmp, []byte{})
 	//入切片,返数组
 	hash := sha256.Sum256(date)
