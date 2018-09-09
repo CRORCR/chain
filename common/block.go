@@ -33,11 +33,15 @@ func NewBlock(data, fatherHash []byte) *Block {
 		PrevBlockHash: fatherHash,
 		TimeStamp:     time.Now().Unix(),
 		MerkleBoot:    []byte{},
-		TargetBits:    1,
+		TargetBits:    targetBits,
 		Nonce:         0,
 		Date:          data,
 	}
-	block.setHash()
+	//block.setHash() hash值来自于工作量证明,不需要手动设置
+	pow := NewProofOfWork(block)
+	nonce, hash := pow.Run()
+	block.Nonce=nonce
+	block.Hash=hash
 	return block
 }
 

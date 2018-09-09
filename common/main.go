@@ -15,5 +15,8 @@ func main() {
 		fmt.Printf("TimeStamp:%x \n",v.TimeStamp)
 		fmt.Printf("MerkleBoot:%x \n",v.MerkleBoot)
 		fmt.Printf("TargetBits:%x \n",v.TargetBits)
+
+		pow := NewProofOfWork(v)
+		fmt.Println("isvalid:",pow.IsValid())
 	}
 }

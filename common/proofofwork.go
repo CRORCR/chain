@@ -9,7 +9,7 @@ import (
 	"math/big"
 )
 
-const targetBits = 24
+const targetBits = 2
 
 type ProofOfWork struct {
 	block     *Block
@@ -64,4 +64,13 @@ func (pow *ProofOfWork) Run() (int64, []byte) {
 		}
 	}
 	return nonce,hash[:]
+}
+
+//校验是否有效
+func(pow *ProofOfWork)IsValid()bool{
+	data := pow.PrepareData(pow.block.Nonce)
+	hash:=sha256.Sum256(data)
+	var intHash big.Int
+	intHash.SetBytes(hash[:])
+	return intHash.Cmp(pow.targetBit)==-1
 }
