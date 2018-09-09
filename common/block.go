@@ -45,6 +45,7 @@ func NewBlock(data, fatherHash []byte) *Block {
 //需要借鉴*****
 func (block *Block) setHash() {
 	tmp := [][]byte{
+		block.PrevBlockHash,
 		utils_chain.IntToByte(block.Nonce),
 		block.MerkleBoot,
 		block.Date,
