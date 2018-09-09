@@ -1,0 +1,18 @@
+package common
+
+type BlockChain struct {
+	blocks []*Block
+}
+
+//构造区块链 先存储一个创世区块
+func NewBlockChain() *BlockChain {
+	return &BlockChain{[]*Block{NewGenesisBlock()}}
+}
+
+//区块链添加一个区块
+func (bc *BlockChain) AddBlockChain(data string) {
+	//hash是上一个区块hash值
+	b := bc.blocks[len(bc.blocks)-1]
+	block := NewBlock([]byte(data), b.Hash)
+	bc.blocks = append(bc.blocks, block)
+}

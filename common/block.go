@@ -41,6 +41,8 @@ func NewBlock(data, fatherHash []byte) *Block {
 	return block
 }
 
+//sha256需要一个byte切片,可以使用bytes.buffer去把数据转成byte数组,然后使用bytes.join拼接成一维数组
+//需要借鉴*****
 func (block *Block) setHash() {
 	tmp := [][]byte{
 		utils_chain.IntToByte(block.Nonce),
@@ -54,4 +56,9 @@ func (block *Block) setHash() {
 	//入切片,返数组
 	hash := sha256.Sum256(date)
 	block.PrevBlockHash = hash[:]
+}
+
+//创世区块
+func NewGenesisBlock()*Block{
+	return  NewBlock([]byte("Genesis Block!"), []byte{})
 }
